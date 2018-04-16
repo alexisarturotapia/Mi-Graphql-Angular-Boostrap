@@ -1,10 +1,10 @@
 // schema.js
 
 const schema = `
-# declare custom scalars for date as GQDate
+# declaro un scalar personalizado para la fecha como GQDate
 scalar GQDate
 
-# registration type
+# tipo Registration
 type Registration {
     id: ID!
     firstName: String
@@ -23,11 +23,11 @@ type Query {
 }
 
 type Mutation {
-    # Create a registration
+    # Crear un registro
     createRegistration (firstName: String,lastName: String, dob: GQDate, email: String, password: String, country: String): Registration
-    # Update a registration
+    # Actualizar un registro
     updateRegistration (id: ID!, firstName: String,lastName: String, dob: GQDate, email: String, password: String, country: String): Registration
-    # Delete a registration
+    # Borrar un registro
     deleteRegistration(id: ID!): Registration
 }
 `;
