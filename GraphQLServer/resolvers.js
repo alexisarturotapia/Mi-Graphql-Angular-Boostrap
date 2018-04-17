@@ -1,6 +1,6 @@
 // resolvers.js
 //Piensarlo como que el Schema es una interfaz en Java y el resolver es la implementación de la interfaz.
-//Fuente para aprender a hacerlo: http://graphql.org/ 
+//Fuente para aprender a hacerlo: http://graphql.org/
 
 const { GraphQLScalarType } = require("graphql");
 
@@ -64,11 +64,34 @@ const registrations = [
 ];
 
 const resolvers = {
+  //la R de mi CRUD
   Query: {
+
+    //query en Graphiql
+    //{
+    //  Registrations {
+    //									id
+    //									firstName
+    //									lastName
+    //									dob
+    //									email
+    //									password
+    //									country
+    //								}
+    //}
+
     Registrations: () => registrations, // retorna todos los registros
+
+    //query en Graphiql
+    //{
+    //  Registration(id: "2"){
+    //    firstName
+    //  }
+    //}
     Registration: (_, { id }) =>
       registrations.find(registration => registration.id == id) // retorna registros por id
   },
+  //el CUD de mi CRUD
   Mutation: {
     // crea nuevo registro
     createRegistration: (root, args) => {
