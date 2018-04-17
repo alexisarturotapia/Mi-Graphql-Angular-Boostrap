@@ -1,4 +1,6 @@
 // resolvers.js
+//Piensarlo como que el Schema es una interfaz en Java y el resolver es la implementación de la interfaz.
+//Fuente para aprender a hacerlo: http://graphql.org/ 
 
 const { GraphQLScalarType } = require("graphql");
 
@@ -10,66 +12,67 @@ function convertDate(inputFormat) {
   return [pad(d.getDate()), pad(d.getMonth()), d.getFullYear()].join("/");
 }
 
-// Define Date scalar type.
+// defíno Date scalar type.
 
 const GQDate = new GraphQLScalarType({
   name: "GQDate",
   description: "Date type",
   parseValue(value) {
-    // value comes from the client
-    return value; // sent to resolvers
+    // el valor proviene del cliente
+    return value; // envío al resolvers
   },
   serialize(value) {
-    // value comes from resolvers
-    return value; // sent to the client
+    // el valor proviene del resolvers
+    return value; // envío al cliente
   },
   parseLiteral(ast) {
-    // value comes from the client
-    return new Date(ast.value); // sent to resolvers
+    // el valor proviene del cliente
+    return new Date(ast.value); // envío al resolvers
   }
 });
 
-// data store with default data
+// almacen de datos con datos por defecto
+// se puede sustituir por un conector wrapper de rest api o algún motor de DB.
 const registrations = [
   {
     id: 1,
-    firstName: "Johan",
-    lastName: "Peter",
+    firstName: "Jonatan",
+    lastName: "Hernandez",
     dob: new Date("2014-08-31"),
-    email: "johan@gmail.com",
-    password: "johan123",
-    country: "UK"
+    email: "jhernandezhh@ferreteria.cl",
+    password: "j123",
+    country: "MX"
   },
   {
     id: 2,
-    firstName: "Mohamed",
-    lastName: "Tariq",
+    firstName: "Vittorio",
+    lastName: "Bertolini",
     dob: new Date("1981-11-24"),
-    email: "tariq@gmail.com",
-    password: "tariq123",
-    country: "UAE"
+    email: "vbertolini@ferreteria.cl",
+    password: "v123",
+    country: "IT"
   },
   {
     id: 3,
-    firstName: "Nirmal",
-    lastName: "Kumar",
+    firstName: "Falopa",
+    lastName: "Parka",
     dob: new Date("1991-09-02"),
-    email: "nirmal@gmail.com",
-    password: "nirmal123",
-    country: "India"
+    email: "hflopezs@ferreteria.cl",
+    password: "f123",
+    country: "CL"
   }
 ];
 
 const resolvers = {
   Query: {
-    Registrations: () => registrations, // return all registrations
+    Registrations: () => registrations, // retorna todos los registros
     Registration: (_, { id }) =>
-      registrations.find(registration => registration.id == id) // return registration by id
+      registrations.find(registration => registration.id == id) // retorna registros por id
   },
   Mutation: {
-    // create a new registration
+    // crea nuevo registro
     createRegistration: (root, args) => {
-      // get next registration id
+      // obtengo el siguiente id de registro
       const nextId =
         registrations.reduce((id, registration) => {
           return Math.max(id, registration.id);
@@ -83,20 +86,20 @@ const resolvers = {
         password: args.password,
         country: args.country
       };
-      // add registration to collection
+      // sumo registro a la colección
       registrations.push(newRegistration);
       return newRegistration;
-    }, // delete registration by id
+    }, // borro registro por id
     deleteRegistration: (root, args) => {
-      // find index by id
+      // busco registro por id
       const index = registrations.findIndex(
         registration => registration.id == args.id
       );
-      // remove registration by index
+      // borro registro por indice
       registrations.splice(index, 1);
-    }, // update registration
+    }, // actualizo registro
     updateRegistration: (root, args) => {
-      // find index by id
+      // busco registro por id
       const index = registrations.findIndex(
         registration => registration.id == args.id
       );
