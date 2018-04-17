@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>DOB</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>FECHA ULTIMA VEZ</th>
           <th>Email</th>
-          <th>Country</th>
+          <th>PAIS</th>
           <th></th>
           <th></th>
         </tr>
@@ -22,35 +22,35 @@
           <td>{{ registration.email }}</td>
           <td>{{ registration.country }}</td>
           <td>
-            <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
+            <button type="button" class="btn btn-info" (click)="onEdit(i)">Editar</button>
           </td>
           <td>
-            <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(i)">Borrar</button>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="text-right">
-      <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
+      <button type="submit" class="btn btn-primary" (click)="onNew()">Nuevo</button>
     </div>
   </div>
   <br>
   <div class="regentry" *ngIf="showNew">
     <form (ngSubmit)="onSave()">
       <div class="form-group row">
-        <label for="firstname-input" class="col-2 col-form-label">First Name</label>
+        <label for="firstname-input" class="col-2 col-form-label">Nombre</label>
         <div class="col-10">
           <input class="form-control" type="text" [(ngModel)]="regModel.firstName" name="firstName">
         </div>
       </div>
       <div class="form-group row">
-        <label for="lastname-input" class="col-2 col-form-label">Last Name</label>
+        <label for="lastname-input" class="col-2 col-form-label">Apellido</label>
         <div class="col-10">
           <input class="form-control" type="text" [(ngModel)]="regModel.lastName" name="lastName">
         </div>
       </div>
       <div class="form-group row">
-        <label for="dob-input" class="col-2 col-form-label">DOB</label>
+        <label for="dob-input" class="col-2 col-form-label">Fecha última vez</label>
         <div class="col-3 input-group">
           <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="dob" [(ngModel)]="regModel.dob" ngbDatepicker #dob="ngbDatepicker">
           <button class="input-group-addon" (click)="dob.toggle()" type="button">
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="city-input" class="col-2 col-form-label">Country</label>
+        <label for="city-input" class="col-2 col-form-label">País</label>
         <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
           <button type="button" class="btn btn-outline-primary" id="dropdownManual" name="country" ngbDropdownToggle>{{regModel.country}}</button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
@@ -80,7 +80,7 @@
         </div>
       </div>
       <button type="submit" class="btn btn-success">{{submitType}}</button>
-      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancelar</button>
     </form>
   </div>
 </div>
