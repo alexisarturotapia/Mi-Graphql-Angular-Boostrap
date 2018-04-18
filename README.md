@@ -2,23 +2,23 @@
 
 node and npm
 
-# Clone the repository
+# Clonar el repository
 
 git clone https://github.com/alexisarturotapia/Mi-Graphql-Angular-Boostrap.git .
 
-# Install GraphQL Server
+# Instalar GraphQL Server
 
-Change the current directory into GraphQLServer and Install the application: `npm install`
+Ir dentro del directorio GraphQLServer e instalar la aplicaión: `npm install`
 
-# Run GraphQL Server
-Run `npm start`. Navigate to `http://localhost:4000/graphql`.
+# Corre el GraphQL Server
+Ejecutar `npm start`. Ir a  `http://localhost:4000/graphql`.
 
-# Install Angular client application
+# Instalar la aplicación cliente
 
-Change the current directory into AngularClient and Install the application: `npm install`
+Ir a dentro del directorio AngularClient e instalar la aplicación: `npm install`
 
-# Install Angular CLI
+# Instalar Angular CLI
 `npm install --save-dev @angular/cli@latest`
 
-# Run the application
-Run `ng serve`. Navigate to `http://localhost:4200`
+# Correr la aplicación
+Run `ng serve`. Ir a `http://localhost:4200`
