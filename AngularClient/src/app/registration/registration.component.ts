@@ -14,7 +14,7 @@ class Registration {
     public dob: NgbDateStruct = null,
     public email: string = "",
     public password: string = "",
-    public country: string = "Select country"
+    public country: string = "Seleccione un país"
   ) {}
 }
 
@@ -24,20 +24,20 @@ class Registration {
   styleUrls: ["./registration.component.css"]
 })
 export class RegistrationComponent implements OnInit {
-  // It maintains list of Registrations
+  // Mantiene una lista de registros
   registrations: Array<any> = [];
-  // It maintains registration Model
+  // Mantiene el modelo de registro
   regModel: Registration;
-  // It maintains registration form display status. By default it will be false.
+  // Mantiene el estado de visualización del formulario de registro. Por defecto será falso.
   showNew: Boolean = false;
-  // It will be either 'Save' or 'Update' based on operation.
+  // Será 'Guardar' o 'Actualizar' en función de la operación.
   submitType: string = "Save";
-  // It maintains table row index based on selection.
+  // Mantiene el índice de fila de la tabla basado en la selección.
   selectedRow: number;
-  // It maintains Array of countries.
-  countries: string[] = ["US", "UK", "India", "UAE"];
+  // Mantiene una matriz de países.
+  countries: string[] = ["MX", "IT", "CL", "VE", "CO", "AR"];
 
-  registrationList: Array<any> = []; // List of Users
+  registrationList: Array<any> = []; // Lista de usuarios
 
   comments: Observable<any>;
 
@@ -47,8 +47,9 @@ export class RegistrationComponent implements OnInit {
     this.displayRegistrations();
   }
 
-  // Get all registrations
+  // Obtener todos los registros
   displayRegistrations() {
+  //D1 Solución
     const getRegistrations = gql`
       {
         Registrations {
@@ -73,17 +74,17 @@ export class RegistrationComponent implements OnInit {
       });
   }
 
-  // This method associate to New Button.
+  // Este método se asocia al botón nuevo.
   onNew() {
-    // Initiate new registration.
+    // Iniciar un nuevo registro.
     this.regModel = new Registration();
-    // Change submitType to 'Save'.
+    // Cambia submitType a 'Save'.
     this.submitType = "Save";
-    // display registration entry section.
+    // mostrar la sección Bakanosa de entrada de registro.
     this.showNew = true;
   }
 
-  // This method associate to Save Button.
+  // Este método se asocia al botón Save.
   onSave() {
     var dateVal =
       this.regModel.dob.year.toString() +
@@ -131,11 +132,11 @@ export class RegistrationComponent implements OnInit {
             this.displayRegistrations();
           },
           error => {
-            console.log("there was an error sending the query", error);
+            console.log("Hubo un error al enviar la consulta. Castigaremos al programador", error);
           }
         );
 
-      // Push registration model object into registration list.
+      // Pone el objeto del modelo de registro en la lista de registro.
       // this.registrations.push(this.regModel);
     } else {
       const updateRegistration = gql`
@@ -185,17 +186,14 @@ export class RegistrationComponent implements OnInit {
           }
         );
     }
-    // Hide registration entry section.
+    // Ocultar la sección Bakanosa de entrada de registro.
     this.showNew = false;
   }
 
-  // This method associate to Edit Button.
+  // Este método esta asociada al botón Editar.
   onEdit(index: number) {
-    // Assign selected table row index.
     this.selectedRow = index;
-    // Initiate new registration.
     this.regModel = new Registration();
-    // Retrieve selected registration from list and assign to model.
     this.regModel = Object.assign({}, this.registrations[this.selectedRow]);
     const dob = new Date(this.registrations[this.selectedRow].dob);
 
@@ -205,13 +203,13 @@ export class RegistrationComponent implements OnInit {
       year: dob.getFullYear()
     };
 
-    // Change submitType to Update.
+    // Cambiar submitType para Update.
     this.submitType = "Update";
-    // Display registration entry section.
+    // Mostra la sección Bakanosa de registro.
     this.showNew = true;
   }
 
-  // This method associate to Delete Button.
+  // Método asociado al boton Eliminar
   onDelete(index: number) {
     const deleteRegistration = gql`
       mutation deleteRegistration($id: ID!) {
@@ -238,15 +236,15 @@ export class RegistrationComponent implements OnInit {
       );
   }
 
-  // This method associate toCancel Button.
+  // Método asociado al botón Cancelar
   onCancel() {
-    // Hide registration entry section.
+    // Oculat la sección de registro.
     this.showNew = false;
   }
 
-  // This method associate to Bootstrap dropdown selection change.
+  // Método asociado con el cambio de selección desplegable de Bootstrap. Mi experimento.
   onChangeCountry(country: string) {
-    // Assign corresponding selected country to model.
+    // Asignar el país seleccionado correspondiente al modelo.
     this.regModel.country = country;
   }
 }
