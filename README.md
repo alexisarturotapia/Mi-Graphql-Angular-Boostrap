@@ -1,4 +1,4 @@
-# Requirements
+# Requisitos 
 
 node and npm
 
