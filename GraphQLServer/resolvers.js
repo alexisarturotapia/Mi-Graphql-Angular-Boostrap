@@ -33,6 +33,7 @@ const GQDate = new GraphQLScalarType({
 
 // almacen de datos con datos por defecto
 // se puede sustituir por un conector wrapper de rest api o algún motor de DB.
+// Por ejemplo Apollo Engine o Apollo Server
 const registrations = [
   {
     id: 1,
@@ -67,27 +68,8 @@ const resolvers = {
   //la R de mi CRUD
   Query: {
 
-    //query en Graphiql
-    //{
-    //  Registrations {
-    //									id
-    //									firstName
-    //									lastName
-    //									dob
-    //									email
-    //									password
-    //									country
-    //								}
-    //}
-
     Registrations: () => registrations, // retorna todos los registros
 
-    //query en Graphiql
-    //{
-    //  Registration(id: "2"){
-    //    firstName
-    //  }
-    //}
     Registration: (_, { id }) =>
       registrations.find(registration => registration.id == id) // retorna registros por id
   },
